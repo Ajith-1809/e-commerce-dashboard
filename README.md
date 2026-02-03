@@ -117,5 +117,5 @@ e-commerce-dashboard/
 ---
 
 <p align="center">
-  Made with ❤️ by the <b>Deepmind Advanced Coding Agent</b>
+  Made with ❤️ by the <b>Deepmind Advanced Coding Developer</b>
 </p>
