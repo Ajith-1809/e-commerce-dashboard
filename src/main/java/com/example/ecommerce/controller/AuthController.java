@@ -9,7 +9,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,9 +19,6 @@ public class AuthController {
     private UserInfoRepository repository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
     private JwtService jwtService;
 
     @Autowired
@@ -30,19 +26,24 @@ public class AuthController {
 
     @PostMapping("/new")
     public String addNewUser(@RequestBody UserInfo userInfo) {
-        userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
+        userInfo.setPassword(userInfo.getPassword());
         repository.save(userInfo);
         return "User added successfully";
     }
 
     @PostMapping("/login")
-    public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
-        if (authentication.isAuthenticated()) {
-            return jwtService.generateToken(authRequest.getUsername());
-        } else {
-            throw new UsernameNotFoundException("invalid user request !");
+    public org.springframework.http.ResponseEntity<String> authenticateAndGetToken(
+            @RequestBody AuthRequest authRequest) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+            if (authentication.isAuthenticated()) {
+                return org.springframework.http.ResponseEntity.ok(jwtService.generateToken(authRequest.getUsername()));
+            } else {
+                throw new UsernameNotFoundException("invalid user request !");
+            }
+        } catch (org.springframework.security.core.AuthenticationException e) {
+            return org.springframework.http.ResponseEntity.status(401).body("Invalid credentials");
         }
     }
 }

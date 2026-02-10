@@ -5,7 +5,6 @@ E:\webtech\projects\e-commerce-dashboard\src\main\java\com\example\ecommerce\rep
 E:\webtech\projects\e-commerce-dashboard\src\main\java\com\example\ecommerce\service\OrderService.java
 E:\webtech\projects\e-commerce-dashboard\src\main\java\com\example\ecommerce\repository\DashboardStatsRepository.java
 E:\webtech\projects\e-commerce-dashboard\src\main\java\com\example\ecommerce\controller\ProductController.java
-E:\webtech\projects\e-commerce-dashboard\src\main\java\com\example\ecommerce\config\CorsConfig.java
 E:\webtech\projects\e-commerce-dashboard\src\main\java\com\example\ecommerce\config\RequestLoggingConfig.java
 E:\webtech\projects\e-commerce-dashboard\src\main\java\com\example\ecommerce\entity\Order.java
 E:\webtech\projects\e-commerce-dashboard\src\main\java\com\example\ecommerce\service\ProductService.java
